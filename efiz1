@@ -1,0 +1,94 @@
+Salida digital
+
+En este ejemplo el LED conectado al pin 13 parpadea cada segundo.
+
+ 
+int ledPin = 13; 		// LED que se encuentra en el pin 13
+   void setup(){ 
+   pinMode(ledPin, OUTPUT);	// El p1n 13 será una salida digital 
+} 
+void loop(){ 
+   digitalWrite(ledPin, HIGH);	// Enciende el LED
+   delay(1000); 				// Pausa de 1 segundo 
+   digitalWrite(ledPin, LOW); 	// Apaga el LED 
+   delay(1000);				// Pausa de 1 segundo 
+} 
+ 
+Salida digital II
+
+En este ejemplo el LED conectado al pin 13 parpadea en un intervalo de tiempo variable que depende del número de veces que se ejecuta el programa (función loop)
+
+ 
+int ledPin = 13;	// LED que se encuentra en el pin 13
+int n = 0;  	//Entero que contará el paso por la función loop
+void setup(){ 
+   pinMode(ledPin, OUTPUT);	// El p1n 13 será una salida digital 
+} 
+void loop(){ 
+   digitalWrite(ledPin, HIGH);	// Enciende el LED
+   delay(1000); 				// Pausa de 1 segundo 
+   digitalWrite(ledPin, LOW);		// Apaga el LED 
+   n++;					//Incrementamos n
+   delay(delayVal(n));			//Pausa de un tiempo variable
+}
+ 
+//Función que devuelve un valor tipo entero según el parámetro pasado
+
+ 
+int delayVal(int f){
+   return f*100;
+}
+ 
+Entrada digital
+
+Este ejemplo lee el valor de un interruptor conectado en el pin 2. Cuando el interruptor está cerrado en el pin de entrada habrá un estado alto (HIGH) y se encenderá el LED.
+
+ 
+int ledPin = 13; 	// Pin de salida para el LED 
+int inPin = 2; // Pin de entrada (donde está conectado el interruptor) 
+void setup() { 
+   pinMode(ledPin, OUTPUT); 
+   pinMode(inPin, INPUT); 
+} 
+void loop() { 
+   if (digitalRead(inPin) == HIGH){	// Si se activa interruptor
+      digitalWrite(ledPin, HIGH);	// Enciende el LED 
+      delay(1000); 			// Pause de 1 segundo 
+      digitalWrite(ledPin, LOW); 	// Apaga el LED 
+      delay(1000); 			// Pausa de 1 segundo 
+   } 
+}
+ 
+Salida PWM
+
+Modulación por ancho de pulso (PWM) puede emplearse, por ejemplo, para establecer el brillo de un led o controlar un servomotor. En el siguiente ejemplo se va aumentando y decrementando el brillo del pin 9 mediante PWM.
+
+ 
+int ledPin = 9; 				// Pin controlado por PWM 
+void setup(){} 
+void loop() { 
+   for (int i=0; i<=255; i++){ 
+      analogWrite(ledPin, i); 	// Establece el brillo a i 
+      delay(100); 				// Pausa de 100 ms 
+   } 
+   for (int i=255; i>=0; i--) { 
+      analogWrite(ledPin, i); 
+      delay(100); 
+   } 
+}
+ 
+Entrada a partir de un potenciómetro
+
+En el siguiente código se emplea arduino para controlar la frecuencia de parpadeo de un LED.
+
+ 
+int potPin = 0; 		// Pin de entrada para el potenciómetro 
+int ledPin = 13; 		// Pin de salida para el LED
+void setup() { 
+   pinMode(ledPin, OUTPUT); 	// Declara el pin del LED como de salida
+} 
+void loop() { 
+   digitalWrite(ledPin, HIGH);	// Enciende el LED 
+   delay(analogRead(potPin));		// Lee el valor del potenciómetro 
+   digitalWrite(ledPin, LOW);		// Apaga el LED 
+   delay(analogRead(potPin)); 	 
